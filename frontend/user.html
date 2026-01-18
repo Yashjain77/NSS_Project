@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- PROFILE -->
+  <div class="profile-card">
+    <h2 id="userName"></h2>
+    <p id="userDetails"></p>
+  </div>
+
+  <!-- DONATE -->
+  <div class="donate-card">
+    <h3>Support Our Cause</h3>
+    <p>Your contribution helps us reach more lives.</p>
+    <input id="amount" type="number" placeholder="Minimum ₹50">
+    <button onclick="donate()">Donate Now</button>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="history-card">
+    <h3>Donation History</h3>
+    <table class="donation-table">
+      <thead>
+        <tr>
+          <th>Amount (₹)</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="donationList"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="js/user.js"></script>
+</body>
+</html>

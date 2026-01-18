@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h2>Create Account</h2>
+
+    <!-- ROLE TOGGLE -->
+    <div class="role-toggle">
+      <button id="userBtn" class="active" type="button">User</button>
+      <button id="adminBtn" type="button">Admin</button>
+    </div>
+
+    <input id="firstName" placeholder="First Name">
+    <input id="lastName" placeholder="Last Name">
+    <input id="email" type="email" placeholder="Email">
+    <input id="phone" placeholder="Phone Number">
+    <input id="occupation" placeholder="Occupation">
+
+    <div class="password-box">
+      <input id="password" type="password" placeholder="Password">
+      <span onclick="togglePassword('password')">👁</span>
+    </div>
+
+    <button class="btn" type="button" onclick="register()">Register</button>
+
+    <p class="switch">
+      Already have an account?
+      <a href="login.html">Login here</a>
+    </p>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="js/auth.js"></script>
+</body>
+</html>

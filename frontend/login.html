@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h2>NGO Platform</h2>
+
+    <!-- ROLE TOGGLE -->
+    <div class="role-toggle">
+      <button id="userBtn" class="active" type="button">User</button>
+      <button id="adminBtn" type="button">Admin</button>
+    </div>
+
+    <input id="loginEmail" type="email" placeholder="Email">
+    
+    <div class="password-box">
+      <input id="loginPassword" type="password" placeholder="Password">
+      <span onclick="togglePassword('loginPassword')">👁</span>
+    </div>
+
+    <button class="btn" type="button" onclick="login()">Login</button>
+
+    <p class="switch">
+      Don’t have an account?
+      <a href="register.html">Register</a>
+    </p>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="js/auth.js"></script>
+</body>
+</html>

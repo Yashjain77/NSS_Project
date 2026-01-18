@@ -1,0 +1,287 @@
+/* =========================
+   GLOBAL RESET
+========================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+  color: #1f2937;
+}
+
+/* Remove underline from links */
+a {
+  text-decoration: none;
+  color: #4f46e5;
+}
+
+/* =========================
+   LANDING PAGE
+========================= */
+.landing-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-card {
+  background: #ffffff;
+  max-width: 720px;
+  padding: 45px;
+  border-radius: 16px;
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+.landing-card h1 {
+  margin-bottom: 20px;
+  font-size: 32px;
+  color: #4f46e5;
+}
+
+.landing-text {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #475569;
+}
+
+.landing-actions {
+  margin-top: 35px;
+}
+
+.landing-actions .btn {
+  display: inline-block;
+  padding: 12px 30px;
+  margin: 8px;
+  border-radius: 10px;
+  background: #4f46e5;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.landing-actions .secondary {
+  background: #64748b;
+}
+
+/* =========================
+   AUTH (LOGIN / REGISTER)
+========================= */
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  width: 380px;
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 16px;
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.auth-card h2 {
+  margin-bottom: 22px;
+  color: #4f46e5;
+}
+
+/* User/Admin toggle */
+.role-toggle {
+  display: flex;
+  background: #f1f5f9;
+  border-radius: 12px;
+  margin-bottom: 22px;
+}
+
+.role-toggle button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  font-weight: 600;
+  border-radius: 12px;
+}
+
+.role-toggle .active {
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+/* Inputs */
+input,
+select {
+  width: 100%;
+  padding: 11px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+}
+
+/* Password eye */
+.password-box {
+  position: relative;
+}
+
+.password-box span {
+  position: absolute;
+  right: 12px;
+  top: 14px;
+  cursor: pointer;
+}
+
+/* Buttons */
+button,
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #4f46e5;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+button:hover,
+.btn:hover {
+  background: #4338ca;
+}
+
+.switch {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+/* =========================
+   USER DASHBOARD
+========================= */
+.container {
+  max-width: 980px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* PROFILE CARD */
+.profile-card {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #ffffff;
+  padding: 30px;
+  border-radius: 18px;
+  margin-bottom: 30px;
+  box-shadow: 0 20px 45px rgba(79, 70, 229, 0.35);
+}
+
+.profile-card h2 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.profile-card p {
+  margin-top: 8px;
+  opacity: 0.95;
+}
+
+/* DONATE CARD */
+.donate-card {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 18px;
+  margin-bottom: 30px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.donate-card h3 {
+  margin-top: 0;
+}
+
+.donate-card p {
+  color: #475569;
+}
+
+/* HISTORY CARD */
+.history-card {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* DONATION TABLE */
+.donation-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+}
+
+.donation-table th,
+.donation-table td {
+  padding: 14px;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.donation-table th {
+  background: #f8fafc;
+  font-weight: 600;
+}
+
+/* STATUS COLORS */
+.success {
+  color: #16a34a;
+  font-weight: bold;
+}
+
+.failed {
+  color: #dc2626;
+  font-weight: bold;
+}
+
+.pending {
+  color: #ea580c;
+  font-weight: bold;
+}
+
+/* =========================
+   ADMIN TABLE (SHARED)
+========================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* =========================
+   TOAST MESSAGE
+========================= */
+.toast {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111827;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-size: 14px;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+/* =========================
+   UTILITY
+========================= */
+.hidden {
+  display: none;
+}
