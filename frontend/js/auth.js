@@ -3,25 +3,37 @@ const API = "http://localhost:5000";
 /* =====================
    STATE
 ===================== */
-let selectedRole = "user"; // DEFAULT FOR BOTH LOGIN & REGISTER
+let selectedRole = sessionStorage.getItem("selectedRole") || "user";
 
 /* =====================
-   INIT ROLE TOGGLE
+   INIT
 ===================== */
 document.addEventListener("DOMContentLoaded", () => {
   const userBtn = document.getElementById("userBtn");
   const adminBtn = document.getElementById("adminBtn");
 
-  if (userBtn && adminBtn) {
-    userBtn.onclick = () => setRole("user");
-    adminBtn.onclick = () => setRole("admin");
+  // Restore selected role after refresh
+  setActiveRole(selectedRole);
+
+  if (userBtn) {
+    userBtn.onclick = () => switchRole("user");
+  }
+  if (adminBtn) {
+    adminBtn.onclick = () => switchRole("admin");
   }
 });
 
 /* =====================
-   ROLE SWITCH
+   ROLE SWITCH (REFRESH)
 ===================== */
-function setRole(role) {
+function switchRole(role) {
+  if (selectedRole === role) return;
+
+  sessionStorage.setItem("selectedRole", role);
+  location.reload(); // 🔄 FULL PAGE REFRESH
+}
+
+function setActiveRole(role) {
   selectedRole = role;
 
   document.getElementById("userBtn")?.classList.remove("active");
@@ -43,7 +55,7 @@ function showToast(msg, ok = false) {
 }
 
 /* =====================
-   PASSWORD EYE
+   PASSWORD TOGGLE
 ===================== */
 function togglePassword(id) {
   const p = document.getElementById(id);
@@ -52,7 +64,7 @@ function togglePassword(id) {
 }
 
 /* =====================
-   REGISTER (FIXED)
+   REGISTER
 ===================== */
 function register() {
   const firstName = document.getElementById("firstName")?.value.trim();
@@ -66,8 +78,6 @@ function register() {
     showToast("All fields are required");
     return;
   }
-
-  console.log("Registering as:", selectedRole);
 
   fetch(API + "/auth/register", {
     method: "POST",
@@ -84,32 +94,23 @@ function register() {
   })
     .then(res => res.json())
     .then(data => {
-      console.log("Register response:", data);
-
       if (!data.msg) {
         showToast("Registration failed");
         return;
       }
 
-      if (data.msg.toLowerCase().includes("exists")) {
-        showToast(data.msg);
-        return;
-      }
-
       showToast("Registered successfully", true);
+      sessionStorage.removeItem("selectedRole");
 
       setTimeout(() => {
-        window.location.href = "login.html";
+        location.href = "login.html";
       }, 1500);
     })
-    .catch(err => {
-      console.error("Register error:", err);
-      showToast("Server error");
-    });
+    .catch(() => showToast("Server error"));
 }
 
 /* =====================
-   LOGIN (UNCHANGED, WORKING)
+   LOGIN
 ===================== */
 function login() {
   const email = document.getElementById("loginEmail")?.value.trim();
@@ -119,8 +120,6 @@ function login() {
     showToast("Email and password are required");
     return;
   }
-
-  console.log("Logging in as:", selectedRole);
 
   fetch(API + "/auth/login", {
     method: "POST",
@@ -133,23 +132,20 @@ function login() {
   })
     .then(res => res.json())
     .then(data => {
-      console.log("Login response:", data);
-
       if (!data.token) {
         showToast(data.msg || "Login failed");
         return;
       }
 
       localStorage.setItem("token", data.token);
+      sessionStorage.removeItem("selectedRole");
+
       showToast("Login successful", true);
 
       setTimeout(() => {
-        window.location.href =
+        location.href =
           selectedRole === "admin" ? "admin.html" : "user.html";
       }, 1200);
     })
-    .catch(err => {
-      console.error("Login error:", err);
-      showToast("Server error");
-    });
+    .catch(() => showToast("Server error"));
 }
