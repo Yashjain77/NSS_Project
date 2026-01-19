@@ -7,7 +7,7 @@ In many real-world NGO platforms, user data is often lost when a donation proces
 
 The application emphasizes **data integrity, transparency, and ethical handling of donations**, making it suitable for academic demonstration as well as real-world inspiration.
 
-The system provides:
+The system provides us:
 - Secure and independent user registration
 - Structured donation tracking
 - Dedicated administrative controls for NGOs
