@@ -1,10 +1,7 @@
 const API = "http://localhost:5000";
 const token = localStorage.getItem("token");
 
-if (!token) {
-  window.location.href = "login.html";
-}
-
+if (!token) location.href = "login.html";
 function showToast(msg) {
   const t = document.getElementById("toast");
   t.innerText = msg;
@@ -18,16 +15,22 @@ function loadProfile() {
   })
     .then(res => res.json())
     .then(u => {
-      document.getElementById("userName").innerText =
-        u.firstName + " " + u.lastName;
-
-      document.getElementById("userDetails").innerHTML = `
+      userName.innerText = u.firstName + " " + u.lastName;
+      userDetails.innerHTML = `
         ${u.email}<br>
         ${u.phone} · ${u.occupation}
       `;
-    })
-    .catch(() => {
-      showToast("Failed to load profile");
+    });
+}
+
+function loadTotalDonation() {
+  fetch(API + "/donation/my/total", {
+    headers: { Authorization: token }
+  })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("totalDonation").innerText =
+        data.totalDonation;
     });
 }
 
@@ -37,11 +40,10 @@ function loadDonations() {
   })
     .then(res => res.json())
     .then(data => {
-      const list = document.getElementById("donationList");
-      list.innerHTML = "";
+      donationList.innerHTML = "";
 
       if (data.length === 0) {
-        list.innerHTML =
+        donationList.innerHTML =
           "<tr><td colspan='3'>No donations yet</td></tr>";
         return;
       }
@@ -50,7 +52,7 @@ function loadDonations() {
         const status =
           d.status === "CREATED" ? "PENDING" : d.status;
 
-        list.innerHTML += `
+        donationList.innerHTML += `
           <tr>
             <td>₹${d.amount}</td>
             <td class="${status.toLowerCase()}">${status}</td>
@@ -78,12 +80,11 @@ function donate() {
   })
     .then(res => res.json())
     .then(order => {
-      let dismissed = false; // 🔑 KEY FLAG
+      let dismissed = false;
 
-      const options = {
+      const rzp = new Razorpay({
         key: "rzp_test_S4Wcq3aLFRAqoA",
         amount: order.amount,
-        currency: "INR",
         order_id: order.id,
 
         handler: function (response) {
@@ -94,6 +95,7 @@ function donate() {
           }).then(() => {
             showToast("Donation successful");
             loadDonations();
+            loadTotalDonation(); 
           });
         },
 
@@ -104,20 +106,16 @@ function donate() {
             loadDonations();
           }
         }
-      };
+      });
 
-      const rzp = new Razorpay(options);
-
-      rzp.on("payment.failed", function (response) {
+      rzp.on("payment.failed", function (res) {
         if (dismissed) return;
-
-        if (!response.error.metadata.payment_id) return;
 
         fetch(API + "/donation/failed", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            order_id: response.error.metadata.order_id
+            order_id: res.error.metadata.order_id
           })
         }).then(() => {
           showToast("Payment failed");
@@ -129,8 +127,6 @@ function donate() {
     });
 }
 
-
-
-/* INIT */
 loadProfile();
 loadDonations();
+loadTotalDonation();

@@ -181,10 +181,9 @@ This makes the project suitable for **academic coursework, internships, and entr
 ---
 
 ## Authors
-- **Yash Jain**  
 - **Atishay Jain**  
 - **Rishabh Gupta**
-
+- **Yash Jain**  
 ---
 
 ## License

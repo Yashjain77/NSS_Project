@@ -5,8 +5,6 @@ const User = require("../models/User");
 
 const router = express.Router();
 
-// REGISTER
-
 router.post("/register", async (req, res) => {
   try {
     const {
@@ -19,7 +17,14 @@ router.post("/register", async (req, res) => {
       role
     } = req.body;
 
-    if (!firstName ||!lastName ||!email ||!password ||!phone ||!occupation) {
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !password ||
+      !phone ||
+      !occupation
+    ) {
       return res.status(400).json({ msg: "All fields are required" });
     }
 
@@ -30,16 +35,22 @@ router.post("/register", async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
-    await User.create({firstName,lastName,email,password: hashedPassword,phone,occupation,role: role || "user"});
+    await User.create({
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+      phone,
+      occupation,
+      role: role || "user"
+    });
+
     return res.json({ msg: "Registered successfully" });
   } catch (err) {
     console.error("REGISTER ERROR:", err);
     return res.status(500).json({ msg: "Registration failed" });
   }
 });
-
-  // LOGIN
 
 router.post("/login", async (req, res) => {
   try {
@@ -71,8 +82,6 @@ router.post("/login", async (req, res) => {
     return res.status(500).json({ msg: "Login failed" });
   }
 });
-
-// Logged-in USER info
 
 router.get("/me", async (req, res) => {
   try {

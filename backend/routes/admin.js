@@ -32,7 +32,6 @@ router.get("/dashboard", auth("admin"), async (req, res) => {
     totalDonated: donationMap[u._id.toString()] || 0
   }));
 
-  // Sort by highest donation
   result.sort((a, b) => b.totalDonated - a.totalDonated);
 
   const totalDonation = donations.reduce(
@@ -45,8 +44,6 @@ router.get("/dashboard", auth("admin"), async (req, res) => {
     totalDonation
   });
 });
-
-// EXPORT CSV
 
 router.get("/export", auth("admin"), async (req, res) => {
   const users = await User.find({ role: "user" }).lean();
@@ -74,7 +71,6 @@ router.get("/export", auth("admin"), async (req, res) => {
     "Total Donated (INR)": donationMap[u._id.toString()] || 0
   }));
 
-  // Sort highest donor 
   toldata.sort(
     (a, b) => b["Total Donated (INR)"] - a["Total Donated (INR)"]
   );

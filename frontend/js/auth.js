@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const userBtn = document.getElementById("userBtn");
   const adminBtn = document.getElementById("adminBtn");
 
-  // Restore selected role after refresh
   setActiveRole(selectedRole);
 
   if (userBtn) {
@@ -21,7 +20,7 @@ function switchRole(role) {
   if (selectedRole === role) return;
 
   sessionStorage.setItem("selectedRole", role);
-  location.reload(); // 🔄 FULL PAGE REFRESH
+  location.reload(); 
 }
 
 function setActiveRole(role) {
@@ -32,6 +31,7 @@ function setActiveRole(role) {
 
   document.getElementById(role + "Btn")?.classList.add("active");
 }
+
 
 function showToast(msg, ok = false) {
   const toast = document.getElementById("toast");
