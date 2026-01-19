@@ -1,13 +1,7 @@
 const API = "http://localhost:5000";
 
-/* =====================
-   STATE
-===================== */
 let selectedRole = sessionStorage.getItem("selectedRole") || "user";
 
-/* =====================
-   INIT
-===================== */
 document.addEventListener("DOMContentLoaded", () => {
   const userBtn = document.getElementById("userBtn");
   const adminBtn = document.getElementById("adminBtn");
@@ -23,9 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-/* =====================
-   ROLE SWITCH (REFRESH)
-===================== */
 function switchRole(role) {
   if (selectedRole === role) return;
 
@@ -42,9 +33,6 @@ function setActiveRole(role) {
   document.getElementById(role + "Btn")?.classList.add("active");
 }
 
-/* =====================
-   TOAST
-===================== */
 function showToast(msg, ok = false) {
   const toast = document.getElementById("toast");
   toast.innerText = msg;
@@ -54,18 +42,12 @@ function showToast(msg, ok = false) {
   setTimeout(() => toast.classList.remove("show"), 2000);
 }
 
-/* =====================
-   PASSWORD TOGGLE
-===================== */
 function togglePassword(id) {
   const p = document.getElementById(id);
   if (!p) return;
   p.type = p.type === "password" ? "text" : "password";
 }
 
-/* =====================
-   REGISTER
-===================== */
 function register() {
   const firstName = document.getElementById("firstName")?.value.trim();
   const lastName = document.getElementById("lastName")?.value.trim();
@@ -109,9 +91,6 @@ function register() {
     .catch(() => showToast("Server error"));
 }
 
-/* =====================
-   LOGIN
-===================== */
 function login() {
   const email = document.getElementById("loginEmail")?.value.trim();
   const password = document.getElementById("loginPassword")?.value;

@@ -5,7 +5,6 @@ if (!token) {
   window.location.href = "login.html";
 }
 
-/* Toast */
 function showToast(msg) {
   const t = document.getElementById("toast");
   t.innerText = msg;
@@ -13,7 +12,6 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove("show"), 2000);
 }
 
-/* Load profile */
 function loadProfile() {
   fetch(API + "/auth/me", {
     headers: { Authorization: token }
@@ -33,7 +31,6 @@ function loadProfile() {
     });
 }
 
-/* Donation history */
 function loadDonations() {
   fetch(API + "/donation/my", {
     headers: { Authorization: token }
@@ -64,7 +61,6 @@ function loadDonations() {
     });
 }
 
-/* Donate */
 function donate() {
   const amt = Number(amount.value);
   if (amt < 50) {
@@ -90,7 +86,6 @@ function donate() {
         currency: "INR",
         order_id: order.id,
 
-        /* SUCCESS */
         handler: function (response) {
           fetch(API + "/donation/verify", {
             method: "POST",
@@ -102,7 +97,6 @@ function donate() {
           });
         },
 
-        /* DISMISS → PENDING */
         modal: {
           ondismiss: function () {
             dismissed = true;
@@ -114,12 +108,9 @@ function donate() {
 
       const rzp = new Razorpay(options);
 
-      /* FAILURE → ONLY IF REAL PAYMENT FAILURE */
       rzp.on("payment.failed", function (response) {
-        // 🚨 If popup was dismissed, IGNORE this event
         if (dismissed) return;
 
-        // 🚨 Extra safety: ensure payment_id exists
         if (!response.error.metadata.payment_id) return;
 
         fetch(API + "/donation/failed", {

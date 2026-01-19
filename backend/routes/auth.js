@@ -5,9 +5,8 @@ const User = require("../models/User");
 
 const router = express.Router();
 
-/* =========================
-   REGISTER
-========================= */
+// REGISTER
+
 router.post("/register", async (req, res) => {
   try {
     const {
@@ -20,38 +19,19 @@ router.post("/register", async (req, res) => {
       role
     } = req.body;
 
-    // Validation
-    if (
-      !firstName ||
-      !lastName ||
-      !email ||
-      !password ||
-      !phone ||
-      !occupation
-    ) {
+    if (!firstName ||!lastName ||!email ||!password ||!phone ||!occupation) {
       return res.status(400).json({ msg: "All fields are required" });
     }
 
-    // Check existing user
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ msg: "User already exists" });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create user
-    await User.create({
-      firstName,
-      lastName,
-      email,
-      password: hashedPassword,
-      phone,
-      occupation,
-      role: role || "user"
-    });
-
+    await User.create({firstName,lastName,email,password: hashedPassword,phone,occupation,role: role || "user"});
     return res.json({ msg: "Registered successfully" });
   } catch (err) {
     console.error("REGISTER ERROR:", err);
@@ -59,9 +39,8 @@ router.post("/register", async (req, res) => {
   }
 });
 
-/* =========================
-   LOGIN
-========================= */
+  // LOGIN
+
 router.post("/login", async (req, res) => {
   try {
     const { email, password, role } = req.body;
@@ -93,9 +72,8 @@ router.post("/login", async (req, res) => {
   }
 });
 
-/* =========================
-   GET LOGGED-IN USER INFO
-========================= */
+// Logged-in USER info
+
 router.get("/me", async (req, res) => {
   try {
     const token = req.headers.authorization;

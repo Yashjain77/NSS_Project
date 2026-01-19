@@ -6,10 +6,6 @@ const { Parser } = require("json2csv");
 
 const router = express.Router();
 
-/* =========================
-   ADMIN DASHBOARD
-   Shows ALL users
-========================= */
 router.get("/dashboard", auth("admin"), async (req, res) => {
   const users = await User.find({ role: "user" }).lean();
 
@@ -23,13 +19,11 @@ router.get("/dashboard", auth("admin"), async (req, res) => {
     }
   ]);
 
-  // Map userId → total donation
   const donationMap = {};
   donations.forEach(d => {
     donationMap[d._id.toString()] = d.totalDonated;
   });
 
-  // Merge users + donations
   const result = users.map(u => ({
     name: `${u.firstName} ${u.lastName}`,
     email: u.email,
@@ -52,9 +46,8 @@ router.get("/dashboard", auth("admin"), async (req, res) => {
   });
 });
 
-/* =========================
-   EXPORT CSV (ALL USERS)
-========================= */
+// EXPORT CSV
+
 router.get("/export", auth("admin"), async (req, res) => {
   const users = await User.find({ role: "user" }).lean();
 
@@ -81,7 +74,7 @@ router.get("/export", auth("admin"), async (req, res) => {
     "Total Donated (INR)": donationMap[u._id.toString()] || 0
   }));
 
-  // Sort highest donor first
+  // Sort highest donor 
   toldata.sort(
     (a, b) => b["Total Donated (INR)"] - a["Total Donated (INR)"]
   );

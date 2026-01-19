@@ -1,6 +1,3 @@
-/* =========================
-   GLOBAL RESET
-========================= */
 * {
   box-sizing: border-box;
 }
@@ -12,15 +9,11 @@ body {
   color: #1f2937;
 }
 
-/* Remove underline from links */
 a {
   text-decoration: none;
   color: #4f46e5;
 }
 
-/* =========================
-   LANDING PAGE
-========================= */
 .landing-wrapper {
   min-height: 100vh;
   display: flex;
@@ -67,9 +60,6 @@ a {
   background: #64748b;
 }
 
-/* =========================
-   AUTH (LOGIN / REGISTER)
-========================= */
 .auth-wrapper {
   min-height: 100vh;
   display: flex;
@@ -91,7 +81,6 @@ a {
   color: #4f46e5;
 }
 
-/* User/Admin toggle */
 .role-toggle {
   display: flex;
   background: #f1f5f9;
@@ -114,7 +103,6 @@ a {
   color: #ffffff;
 }
 
-/* Inputs */
 input,
 select {
   width: 100%;
@@ -125,7 +113,6 @@ select {
   font-size: 14px;
 }
 
-/* Password eye */
 .password-box {
   position: relative;
 }
@@ -137,7 +124,6 @@ select {
   cursor: pointer;
 }
 
-/* Buttons */
 button,
 .btn {
   width: 100%;
@@ -161,16 +147,12 @@ button:hover,
   font-size: 14px;
 }
 
-/* =========================
-   USER DASHBOARD
-========================= */
 .container {
   max-width: 980px;
   margin: auto;
   padding: 40px 20px;
 }
 
-/* PROFILE CARD */
 .profile-card {
   background: linear-gradient(135deg, #4f46e5, #6366f1);
   color: #ffffff;
@@ -190,7 +172,6 @@ button:hover,
   opacity: 0.95;
 }
 
-/* DONATE CARD */
 .donate-card {
   background: #ffffff;
   padding: 28px;
@@ -207,7 +188,6 @@ button:hover,
   color: #475569;
 }
 
-/* HISTORY CARD */
 .history-card {
   background: #ffffff;
   padding: 28px;
@@ -215,7 +195,6 @@ button:hover,
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
 }
 
-/* DONATION TABLE */
 .donation-table {
   width: 100%;
   border-collapse: collapse;
@@ -234,7 +213,6 @@ button:hover,
   font-weight: 600;
 }
 
-/* STATUS COLORS */
 .success {
   color: #16a34a;
   font-weight: bold;
@@ -250,17 +228,11 @@ button:hover,
   font-weight: bold;
 }
 
-/* =========================
-   ADMIN TABLE (SHARED)
-========================= */
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-/* =========================
-   TOAST MESSAGE
-========================= */
 .toast {
   position: fixed;
   bottom: 22px;
@@ -279,9 +251,6 @@ table {
   opacity: 1;
 }
 
-/* =========================
-   UTILITY
-========================= */
 .hidden {
   display: none;
 }
