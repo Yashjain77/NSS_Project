@@ -91,7 +91,7 @@ The donation module is designed with transparency and ethical handling in mind.
 ### Admin Module
 The admin module provides visibility and control to NGO administrators.
 - Secure admin login
-- View and manage registered users
+- View and manage registered users using database
 - Monitor and analyze donation records
 - Improved transparency and reporting capabilities
 
@@ -162,10 +162,10 @@ These variables help keep sensitive configuration separate from source code.
 ---
 
 ## Future Enhancements
-- Integration with payment gateways (Razorpay / Stripe)
+- Integration with real payment gateways (Razorpay) (currently they are test mode paymet gateways)
 - Email notifications for registrations and donations
 - Role-based access control (RBAC)
-- Deployment on cloud platforms (AWS / Render / Vercel)
+- Deployment on cloud platforms (Vercel)
 
 ---
 
